@@ -1,0 +1,147 @@
+---
+title: Core Products
+description: Overview of Sadham Hussain's essential services and tools
+---
+
+## Overview of Core Products
+
+Sadham Hussain offers a suite of core products designed to organize information, enhance productivity, and foster innovation. These services form the foundation of our platform, providing users with powerful tools to access and utilize global data effectively.
+
+<Columns cols={2}>
+  <Card title="Search Engine" icon="search" href="#search-engine">
+    Advanced search capabilities across vast datasets.
+  </Card>
+  <Card title="Cloud Storage" icon="cloud" href="#cloud-storage">
+    Secure and scalable data storage solutions.
+  </Card>
+  <Card title="Productivity Suite" icon="file-text" href="#productivity-suite">
+    Tools for collaboration and document management.
+  </Card>
+  <Card title="Analytics Platform" icon="bar-chart" href="#analytics-platform">
+    Insights and reporting for data-driven decisions.
+  </Card>
+</Columns>
+
+## Search Engine
+
+Our search engine organizes the world's information, making it accessible and useful. It employs sophisticated algorithms to deliver relevant results quickly, supporting multiple languages and formats.
+
+<Callout kind="info">
+  The search engine processes over a billion queries daily, ensuring fast and accurate responses.
+</Callout>
+
+<Tabs>
+  <Tab title="Basic Search" icon="search">
+    Perform simple text-based searches to find information.
+
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+const results = await search('artificial intelligence');
+console.log(results);
+```
+      ```python
+results = search('artificial intelligence')
+print(results)
+```
+    </CodeGroup>
+  </Tab>
+  <Tab title="Advanced Search" icon="filter">
+    Use filters and operators for more precise queries.
+
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+const advancedResults = await search('machine learning', { type: 'academic', year: 2023 });
+console.log(advancedResults);
+```
+      ```python
+advanced_results = search('machine learning', type='academic', year=2023)
+print(advanced_results)
+```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## Cloud Storage
+
+Secure cloud storage provides scalable solutions for data management. Users can store, share, and collaborate on files with enterprise-grade security and reliability.
+
+<Steps>
+  <Step title="Upload Files" icon="upload">
+    Select files from your device and upload them to the cloud.
+  </Step>
+  <Step title="Organize Content" icon="folder">
+    Create folders and apply tags to keep your data structured.
+  </Step>
+  <Step title="Share Access" icon="share-2">
+    Grant permissions to collaborators for seamless teamwork.
+  </Step>
+  <Step title="Sync Devices" icon="refresh-cw">
+    Automatically sync files across all your devices.
+  </Step>
+</Steps>
+
+<Expandable title="Storage Best Practices" default-open="false">
+  Regularly back up important data and use encryption for sensitive files to maintain security.
+</Expandable>
+
+## Productivity Suite
+
+A comprehensive set of tools for document creation, collaboration, and communication. These applications enable teams to work together efficiently from anywhere.
+
+| Feature | Description | Use Case |
+|---------|-------------|----------|
+| Document Editor | Create and edit text documents | Writing reports and proposals |
+| Spreadsheet Tool | Analyze data with formulas | Financial modeling and tracking |
+| Presentation App | Design visual presentations | Creating marketing materials |
+| Email Service | Communicate professionally | Team coordination and client outreach |
+
+<Callout kind="tip">
+  Integrate productivity tools with our APIs to automate workflows and enhance efficiency.
+</Callout>
+
+## Analytics Platform
+
+Gain insights from data with powerful analytics tools. Visualize trends, track performance, and make informed decisions based on comprehensive reports.
+
+<ExpandableGroup>
+  <Expandable title="Data Visualization" default-open="true">
+    Create charts and graphs to represent complex data sets clearly.
+  </Expandable>
+  <Expandable title="Real-time Monitoring" default-open="false">
+    Track metrics as they happen with live dashboards.
+  </Expandable>
+  <Expandable title="Custom Reports" default-open="false">
+    Generate tailored reports for specific business needs.
+  </Expandable>
+</ExpandableGroup>
+
+## Integration and APIs
+
+All core products support API integration, allowing developers to build custom solutions that leverage our services. This extensibility ensures that our platform can adapt to diverse user requirements.
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+// Integrate search with analytics
+const integratedData = await Promise.all([
+  search('market trends'),
+  getAnalytics('revenue')
+]);
+console.log(integratedData);
+```
+  ```python
+# Integrate search with analytics
+import asyncio
+async def integrated_data():
+    search_results = await search('market trends')
+    analytics = await get_analytics('revenue')
+    return search_results, analytics
+```
+</CodeGroup>
+
+## Security and Compliance
+
+We prioritize user privacy and data security across all products. Robust encryption, regular audits, and compliance with global standards ensure that your information remains protected.
+
+<Update label="2024-10-01" description="Security Enhancement" tags={["security", "improvement"]}>
+  Implemented advanced encryption protocols and enhanced audit logging for better compliance.
+</Update>

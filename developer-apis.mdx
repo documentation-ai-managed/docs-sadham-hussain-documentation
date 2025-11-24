@@ -1,0 +1,240 @@
+---
+title: Developer APIs
+description: Guide to integrating and using Sadham Hussain's developer APIs
+---
+
+## Introduction to Developer APIs
+
+Sadham Hussain provides a comprehensive set of APIs that enable developers to integrate our services into their applications. These APIs follow RESTful principles and support various programming languages, making it easy to build innovative solutions.
+
+<Columns cols={3}>
+  <Card title="Authentication API" icon="key" href="#authentication">
+    Secure access management for all services.
+  </Card>
+  <Card title="Search API" icon="search" href="#search-api">
+    Powerful search capabilities with advanced filtering.
+  </Card>
+  <Card title="Storage API" icon="database" href="#storage-api">
+    Cloud storage operations for file management.
+  </Card>
+</Columns>
+
+## Getting Started with APIs
+
+<Steps>
+  <Step title="Register Application" icon="user-plus">
+    Create a developer account and register your application to obtain API keys.
+  </Step>
+  <Step title="Obtain Credentials" icon="key">
+    Generate API keys and configure authentication settings.
+  </Step>
+  <Step title="Test Endpoints" icon="terminal">
+    Use our sandbox environment to test API calls before production deployment.
+  </Step>
+  <Step title="Implement Error Handling" icon="alert-triangle">
+    Add proper error handling and retry logic to your application.
+  </Step>
+  <Step title="Monitor Usage" icon="bar-chart">
+    Track API usage and performance metrics through the developer dashboard.
+  </Step>
+</Steps>
+
+## Authentication API
+
+Secure authentication is fundamental to using our APIs. We support OAuth 2.0 and API key authentication methods to ensure secure access.
+
+<Tabs>
+  <Tab title="OAuth 2.0" icon="shield">
+    Industry-standard authentication protocol for secure token-based access.
+
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+const authResponse = await fetch('/api/oauth/token', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  body: new URLSearchParams({
+    grant_type: 'client_credentials',
+    client_id: 'your_client_id',
+    client_secret: 'your_client_secret'
+  })
+});
+const token = await authResponse.json();
+```
+      ```python
+import requests
+token_response = requests.post('/api/oauth/token', data={
+    'grant_type': 'client_credentials',
+    'client_id': 'your_client_id',
+    'client_secret': 'your_client_secret'
+})
+token = token_response.json()
+```
+    </CodeGroup>
+  </Tab>
+  <Tab title="API Keys" icon="key">
+    Simple key-based authentication for straightforward integrations.
+
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+const response = await fetch('/api/search', {
+  headers: { 'Authorization': `Bearer ${apiKey}` }
+});
+const data = await response.json();
+```
+      ```python
+import requests
+response = requests.get('/api/search', headers={'Authorization': f'Bearer {api_key}'})
+data = response.json()
+```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+<Callout kind="danger">
+  Never expose API keys or secrets in client-side code. Always use secure server-side storage.
+</Callout>
+
+## Search API
+
+Our search API allows you to query vast amounts of data with precision. It supports full-text search, filtering, and sorting to deliver relevant results.
+
+<Expandable title="Search Parameters" default-open="false">
+  | Parameter | Type | Description |
+  |-----------|------|-------------|
+  | query | string | Search term or phrase |
+  | limit | integer | Maximum results to return (max 100) |
+  | offset | integer | Number of results to skip |
+  | sort | string | Sort order (relevance, date, alphabetical) |
+  | filters | object | Additional filtering criteria |
+</Expandable>
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+const searchParams = {
+  query: 'machine learning algorithms',
+  limit: 20,
+  sort: 'relevance',
+  filters: { language: 'en', year: 2023 }
+};
+const searchResponse = await fetch('/api/search', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+  body: JSON.stringify(searchParams)
+});
+const results = await searchResponse.json();
+```
+  ```python
+import requests
+search_params = {
+    'query': 'machine learning algorithms',
+    'limit': 20,
+    'sort': 'relevance',
+    'filters': {'language': 'en', 'year': 2023}
+}
+response = requests.post('/api/search', 
+    json=search_params, 
+    headers={'Authorization': f'Bearer {token}'})
+results = response.json()
+```
+</CodeGroup>
+
+## Storage API
+
+Manage files and data in the cloud with our storage API. Upload, download, and organize content securely with granular access controls.
+
+<Steps>
+  <Step title="Upload File" icon="upload">
+    Send a POST request with file data to create or update a file.
+  </Step>
+  <Step title="Set Permissions" icon="users">
+    Configure access permissions for shared files.
+  </Step>
+  <Step title="Download Content" icon="download">
+    Retrieve files using GET requests with proper authentication.
+  </Step>
+  <Step title="Delete Resources" icon="trash-2">
+    Remove files or folders when no longer needed.
+  </Step>
+</Steps>
+
+<ExpandableGroup>
+  <Expandable title="File Upload Example" default-open="true">
+    <CodeGroup tabs="JavaScript,Python">
+      ```javascript
+const formData = new FormData();
+formData.append('file', fileInput.files[0]);
+const uploadResponse = await fetch('/api/storage/files', {
+  method: 'POST',
+  headers: { 'Authorization': `Bearer ${token}` },
+  body: formData
+});
+const uploadResult = await uploadResponse.json();
+```
+      ```python
+import requests
+with open('document.pdf', 'rb') as file:
+    upload_response = requests.post('/api/storage/files', 
+        files={'file': file}, 
+        headers={'Authorization': f'Bearer {token}'})
+    upload_result = upload_response.json()
+```
+    </CodeGroup>
+  </Expandable>
+  <Expandable title="Rate Limiting" default-open="false">
+    API calls are subject to rate limits to ensure fair usage. Monitor your usage in the developer dashboard.
+  </Expandable>
+</ExpandableGroup>
+
+## Error Handling
+
+Implement robust error handling to manage API failures gracefully. Our APIs return standard HTTP status codes and detailed error messages.
+
+<Callout kind="info">
+  Common error codes include 400 (Bad Request), 401 (Unauthorized), 429 (Too Many Requests), and 500 (Internal Server Error).
+</Callout>
+
+## Best Practices
+
+Follow these guidelines to build reliable and efficient applications using our APIs.
+
+| Practice | Description | Benefit |
+|----------|-------------|---------|
+| Implement Retries | Retry failed requests with exponential backoff | Improved reliability |
+| Cache Responses | Store frequently accessed data locally | Reduced latency |
+| Monitor Usage | Track API calls and performance metrics | Better optimization |
+| Validate Input | Check data before sending API requests | Fewer errors |
+| Use Webhooks | Subscribe to real-time updates | Immediate notifications |
+
+## Webhooks Integration
+
+Set up webhooks to receive real-time notifications about events in your applications. This enables reactive systems that respond immediately to changes.
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+app.post('/webhook/search-update', (req, res) => {
+  const { event, data } = req.body;
+  if (event === 'search_completed') {
+    processSearchResults(data);
+  }
+  res.sendStatus(200);
+});
+```
+  ```python
+from flask import Flask, request
+app = Flask(__name__)
+@app.route('/webhook/search-update', methods=['POST'])
+data = request.json
+event = data.get('event')
+if event == 'search_completed':
+    process_search_results(data)
+return '', 200
+```
+</CodeGroup>
+
+## Migration Guide
+
+If you're migrating from older API versions, follow these steps to ensure a smooth transition.
+
+<Update label="2024-09-15" description="API v2.0 Migration" tags={["api", "migration"]}>
+  Updated authentication flows and added new endpoints for enhanced security.
+</Update>

@@ -1,0 +1,85 @@
+{
+  "name": "Sadham Hussain Documentation",
+  "initialRoute": "introduction",
+  "primaryColor": "#e9902e",
+  "colors": {
+    "light": {
+      "brand": "#e9902e",
+      "heading": "#1a1a1a",
+      "text": "#374151"
+    },
+    "dark": {
+      "brand": "#ffa500",
+      "heading": "#f2f2f2",
+      "text": "#c1c1c1"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "icon": "book",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "Introduction",
+                "path": "introduction",
+                "icon": "star"
+              }
+            ]
+          },
+          {
+            "group": "Core Concepts",
+            "icon": "lightbulb",
+            "pages": [
+              {
+                "title": "Core Products",
+                "path": "core-products",
+                "icon": "box"
+              },
+              {
+                "title": "Developer APIs",
+                "path": "developer-apis",
+                "icon": "code"
+              },
+              {
+                "title": "Innovation Culture",
+                "path": "innovation-culture",
+                "icon": "users"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Endpoints",
+            "icon": "terminal",
+            "openapi": "openapi.yaml"
+          }
+        ]
+      },
+      {
+        "tab": "Changelog",
+        "icon": "clock",
+        "pages": [
+          {
+            "title": "Release History",
+            "path": "changelog",
+            "icon": "history"
+          }
+        ]
+      }
+    ]
+  },
+  "seo": {
+    "robots:index": true,
+    "robots:follow": true
+  }
+}

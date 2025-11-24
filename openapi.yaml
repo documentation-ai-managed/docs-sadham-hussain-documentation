@@ -1,0 +1,116 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Sadham Hussain API
+  license:
+    name: MIT
+servers:
+  - url: https://api.sadhamhussain.com/v1
+paths:
+  /documents:
+    get:
+      summary: Retrieve a list of all documents in the system. This endpoint supports pagination and filtering to efficiently browse through large collections of documents. It returns metadata for each document including title, creation date, and author information.
+      operationId: listDocuments
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: A paged array of documents
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Documents'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new document in the system. This endpoint allows users to upload and store documents with associated metadata. It supports various file formats and automatically processes the content for search and indexing purposes.
+      operationId: createDocuments
+      responses:
+        201:
+          description: Document created successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /documents/{documentId}:
+    get:
+      summary: Retrieve detailed information about a specific document. This endpoint provides comprehensive metadata and content access for individual documents. It includes version history, permissions, and download links when applicable.
+      operationId: showDocumentById
+      parameters:
+        - name: documentId
+          in: path
+          required: true
+          description: The id of the document to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Documents'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /searches:
+    post:
+      summary: Perform a search across all documents and data. This endpoint processes complex queries with multiple filters and returns ranked results. It supports natural language queries and advanced search operators for precise information retrieval.
+      operationId: performSearch
+      responses:
+        200:
+          description: Search results returned successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Document:
+      required:
+        - id
+        - title
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        content:
+          type: string
+    Documents:
+      type: array
+      items:
+        $ref: '#/components/schemas/Document'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
